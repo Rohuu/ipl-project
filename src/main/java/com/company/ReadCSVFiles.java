@@ -1,5 +1,8 @@
 package com.company;
 
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -29,22 +32,17 @@ public class ReadCSVFiles {
 
     static List<Match> readMatchFile() throws IOException {
         String file = "src/main/resources/matches.csv";
-        BufferedReader reader = null;
-        String line = "";
+
         List<Match> matches = new ArrayList<>();
-        try {
-            reader = new BufferedReader(new FileReader(file));
-            reader.readLine();
-            while ((line = reader.readLine()) != null) {
-                String[] row = line.split(",");
-                Match match = new Match(row);
+        try (CSVReader csvReader = new CSVReader(new FileReader(file))){
+            String[] values;
+            csvReader.readNext();
+            while ((values = csvReader.readNext()) != null) {
+                Match match = new Match(values);
                 matches.add(match);
             }
-        } catch (Exception e) {
-            System.out.println(line);
+        } catch (CsvValidationException e) {
             e.printStackTrace();
-        } finally {
-            reader.close();
         }
         return matches;
     }
