@@ -47,6 +47,30 @@ private String fielder;
         this.fielder = fielder;
     }
 
+    public Delivery(String[] values) {
+        this.match_id = Integer.parseInt(values[0]);
+        this.inning = Integer.parseInt(values[1]);
+        this.batting_team = values[2];
+        this.bowling_team = values[3];
+        this.over = Integer.parseInt(values[4]);
+        this.ball = Integer.parseInt(values[5]);
+        this.batsman = values[6];
+        this.non_striker = values[7];
+        this.bowler = values[8];
+        this.is_super_over = Boolean.getBoolean(values[9]);
+        this.wide_runs = Integer.parseInt(values[10]);
+        this.bye_runs =Integer.parseInt(values[11]);;
+        this.legbye_runs = Integer.parseInt(values[12]);;
+        this.noball_runs = Integer.parseInt(values[13]);;
+        this.penalty_runs = Integer.parseInt(values[14]);;
+        this.batsman_runs = Integer.parseInt(values[15]);
+        this.extra_runs = Integer.parseInt(values[16]);
+        this.total_runs = Integer.parseInt(values[17]);;
+        this.player_dismissed = values[18];
+        this.dismissal_kind = values[19];
+        this.fielder = values[20];
+    }
+
     public int getMatch_id() {
         return match_id;
     }
