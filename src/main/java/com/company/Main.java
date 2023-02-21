@@ -9,26 +9,32 @@ public class Main {
         List<Match> allMatches = ReadCSVFiles.readMatchFile();
         List<Delivery> allDeliveries = ReadCSVFiles.readDeliveryFile();
 
-//      Map<Integer, Integer> matchesPerYearOfAllTheYear=matchesPlayedPerYearAllTheYear(allMatches);
-//      System.out.println(matchesPerYearOfAllTheYear);
+      Map<Integer, Integer> matchesPerYearOfAllTheYear=matchesPlayedPerYearAllTheYear(allMatches);
+      System.out.println(matchesPerYearOfAllTheYear);
 
         Map<String, Map<Integer, Integer>> matchesWonByAllTeamsAllYears = matchesWonByAllTeamsAllYears(allMatches);
         System.out.println(matchesWonByAllTeamsAllYears);
 
-//          For the year 2016 get the extra runs conceded per team
-//        Map<String,Integer> extraRunsConceded=extraRunsConcededPerTeam(allDeliveries,allMatches);
-//        System.out.println(extraRunsConceded);
+        Map<String,Integer> extraRunsConceded=extraRunsConcededPerTeam(allDeliveries,allMatches);
+        System.out.println(extraRunsConceded);
     }
 
-//    private static Map<String, Integer> extraRunsConcededPerTeam(List<Delivery> allDelivery ,List<Match> allMatches) {
-//        Map<String,Integer> extraRunsPerTeamMap=new HashMap<>();
-//        for (Delivery delivery: allDelivery) {
-//            if(match.getSeason()==2016){
-////                extraRunsPerTeamMap.put(match.getTeam1(),match.get)
-//            }
-//        }
+    private static Map<String, Integer> extraRunsConcededPerTeam(List<Delivery> allDelivery ,List<Match> allMatches) {
+        Map<String,Integer> extraRunsPerTeamMap=new HashMap<>();
 
-//    }
+        for (Delivery delivery: allDelivery) {
+            if(delivery.getMatch_id()>=577 && delivery.getMatch_id()<=636){
+//                if(extraRunsPerTeamMap.containsKey(delivery.getBowling_team())){
+//                    extraRunsPerTeamMap.put(delivery.getBowling_team(),extraRunsPerTeamMap.get(delivery.getBowling_team())+delivery.getExtra_runs());
+//                }
+//                else{
+//                    extraRunsPerTeamMap.put(delivery.getBowling_team(),delivery.getExtra_runs());
+//                }
+                extraRunsPerTeamMap.put(delivery.getBowling_team(),extraRunsPerTeamMap.getOrDefault(delivery.getBowling_team(),delivery.getExtra_runs())+delivery.getExtra_runs());
+            }
+        }
+        return extraRunsPerTeamMap;
+    }
 
 
     private static Map<String, Map<Integer, Integer>> matchesWonByAllTeamsAllYears(List<Match> allMatches) {
